@@ -45,7 +45,8 @@
     "test:h5": "cross-env UNI_PLATFORM=h5 jest -i",
     "test:ios": "cross-env UNI_PLATFORM=app-plus UNI_OS_NAME=ios jest -i",
     "test:mp-baidu": "cross-env UNI_PLATFORM=mp-baidu jest -i",
-    "test:mp-weixin": "cross-env UNI_PLATFORM=mp-weixin jest -i"
+    "test:mp-weixin": "cross-env UNI_PLATFORM=mp-weixin jest -i",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@dcloudio/uni-app-plus": "^2.0.1-35320220729001",
@@ -76,6 +77,8 @@
   },
   "devDependencies": {
     "@babel/runtime": "~7.17.9",
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
     "@dcloudio/types": "^3.0.4",
     "@dcloudio/uni-automator": "^2.0.1-35320220729001",
     "@dcloudio/uni-cli-i18n": "^2.0.1-35320220729001",
@@ -105,7 +108,8 @@
     "stylelint-config-recommended-vue": "^1.4.0",
     "stylelint-config-standard": "^26.0.0",
     "stylelint-config-standard-scss": "^5.0.0",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "husky": "^8.0.0"
   },
   "browserslist": [
     "Android >= 4.4",
@@ -116,5 +120,16 @@
   },
   "uni-app": {
     "scripts": {}
+  },
+  "lint-staged": {
+    "*.scss": [
+      "stylelint \"src/**/*.{vue,scss}\" --fix",
+      "git add"
+    ],
+    "*{.js,.vue}": [
+      "stylelint \"src/**/*.vue\" --fix",
+      "eslint --ext .js,.vue --fix ./src",
+      "git add"
+    ]
   }
 }
